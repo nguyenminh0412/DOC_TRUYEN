@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> Login Form </title>
+    <!-- meta tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../css/style.css" rel="stylesheet" type="text/css" />
+    <link href="../css/fontawesome-all.css" rel="stylesheet" />
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+</head>
+
+
+<body id="page-top">
+    <div class=" w3l-login-form">
+      <form action="/dangky" method="post">
+        <div class=" w3l-form-group">
+          <label>Username:</label>
+          <div class="group">
+            <i class="fa fa-user"></i>
+            <input type="text" id="user_name" name="user_name" class="form-control" placeholder="Username" required="required"  />
+          </div>
+        </div>
+        <div class=" w3l-form-group">
+          <label>Email:</label>
+          <div class="group">
+            <i class="fa fa-envelope-o"></i>
+            <input type="email" id="email" name="email" class="form-control" placeholder="email" required="required"  />
+          </div>
+        </div>
+        <div class=" w3l-form-group">
+          <label>Full Name:</label>
+          <div class="group">
+            <i class="fa fa-user-circle"></i>
+            <input type="text" id="full_name" name="full_name" class="form-control" placeholder="Họ và tên"  required="required" />
+          </div>
+        </div>
+        <div class=" w3l-form-group">
+          <label>Password:</label>
+          <div class="group">
+            <i class="fa fa-unlock"></i>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="required" />
+          </div>
+        </div>
+        <div class=" w3l-form-group">
+          <label>Nhập lại Password:</label>
+          <div class="group">
+            <i class="fa fa-unlock"></i>
+            <input type="password" id="re_password" name="re_password" class="form-control" placeholder="Password" required="required" />
+          </div>
+        </div>
+       
+          <button  type="submit"> Đăng Ký</button>
+          <input type="submit" onclick="dang_ky_test()" text="Đăng Ký">
+        </form>
+        <form action="/truyen/" method="get">
+          <p class=" w3l-register-p">Don't have an account?<a href="/truyen/dang_nhap" class="register"> Đăng nhập</a></p>
+        </form>
+      </div>
+      
+ 
+    <script>
+      function dang_ky_nhap(){
+        alert("Đăng ký thành công!");
+      }
+
+        function dang_ky_test(){
+            const username = document.getElementById("user_name").value;
+            const password = document.getElementById("password").value;
+            const re_password = document.getElementById("re_password").value;
+            const full_name = document.getElementById('full_name').value;
+            const email = document.getElementById('email').value;
+            const data = {
+            username: user_name,
+            email: email,
+            displayname: full_name,
+            firstname: a,
+            lastname: a,
+            avartar: a,
+            password: password,
+            roleid: 0,
+          };
+
+          fetch("/dangky", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          })
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                alert("Đăng ký thành công!");
+              } else {
+                alert("Đăng ký thất bại!");
+              }
+            });
+
+
+
+        }
+
+
+
+
+        function dang_ky() {
+
+    const username = document.getElementById("user_name").value;
+    const password = document.getElementById("password").value;
+    const re_password = document.getElementById("re_password").value;
+    const full_name = document.getElementById('full_name').value;
+    const email = document.getElementById('email').value;
+
+  for (const input of document.querySelectorAll("input")) {
+    if (input.value === null || input.value === "") {
+      alert("Vui lòng điền tất cả các trường bắt buộc.");
+      return false;
+    }
+  }
+  const usernameRegex = "^[a-zA-Z0-9]{5,30}$"; 
+  if (!username.match(usernameRegex)) {
+    alert("Username phải dài 5-30 ký tự và không chứa ký tự đặc biệt.");
+    return false;
+  }
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!email.match(emailRegex)) {
+        alert("Email không hợp lệ.");
+        return false;
+    }
+  const passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,16}$"; 
+  if (!password.match(passwordRegex)) {
+    alert("Password phải có 8-16 ký tự với ít nhất một chữ thường, chữ hoa, số và ký tự đặc biệt.");
+    return false;
+  }
+
+  // Password confirmation
+  if (password !== re_password) {
+    alert("Mật khẩu không trùng khớp.");
+    return false;
+  }
+    
+          const data = {
+            username: user_name,
+            email: email,
+            displayname: full_name,
+            firstname: a,
+            lastname: a,
+            avartar: a,
+            password: password,
+            roleid: 0,
+          };
+          fetch('/dangky', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          })
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                alert("Đăng ký thành công!");
+              } else {
+                alert("Đăng ký thất bại!");
+              }
+            });
+        }
+    
+      </script>
+
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../js/sb-admin-2.min.js"></script>
+    <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="../js/demo/datatables-demo.js"></script> 
+
+</body>
+
+</html>

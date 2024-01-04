@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+    <!-- meta tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="Art Sign Up Form Responsive Widget, Audio and Video players, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, 
+		Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design"
+    />
+    <link href="../css/style.css" rel="stylesheet" type="text/css" />
+   
+    <link href="../css/fontawesome-all.css" rel="stylesheet" />
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+       
+
+   
+</head>
+                                                           
+
+<body>
+    <div class=" w3l-login-form" style="margin-top: 20px;">
+        <h2>Login Here</h2>
+            <div class=" w3l-form-group">
+                <label>Username:</label>
+                <div class="group">
+                    <i class="fa fa-user"></i>
+                    <input type="text" id="username" class="form-control" placeholder="Username" required="required" />
+                </div>
+            </div>
+            <div class=" w3l-form-group">
+                <label>Password:</label>
+                <div class="group">
+                    <i class="fa fa-unlock"></i>
+                    <input type="password" id="password" class="form-control" placeholder="Password" required="required" />
+                </div>
+            </div>
+        <div>
+          <form action="/truyen/" method="get">
+            <p class=" w3l-register-p"><a href="/truyen/dang_ky" class="register"> Quên mật khẩu ?</a></p>
+           </form>
+        </div>
+            <button type="submit" onclick="login()">Login</button>
+       <form action="/truyen/" method="get">
+        <p class=" w3l-register-p">Don't have an account?<a href="/truyen/dang_ky" class="register"> Register</a></p>
+       </form>
+        
+    </div>
+
+
+
+  
+
+    
+    <script>
+        function login() {
+          const username = document.getElementById('username').value;
+          const password = document.getElementById('password').value;
+        
+          if (!username || !password) {
+            alert('Hãy nhập đày đủ thông tin!');
+            return; 
+          }
+          const url = '/auth/signin';
+          const data = {username,password,};
+          fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.accessToken) {
+                //alert('Đăng nhập  thành công!');
+                window.location.href='/truyen/open_truyen'
+              } else {
+                alert(' Đăng nhập thất bại!');
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        }
+//============================================================================================
+
+
+
+
+        </script>
+
+        
+
+</body>
+
+</html>
